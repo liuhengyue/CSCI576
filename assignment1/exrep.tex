@@ -1,0 +1,43 @@
+\documentclass[10pt]{report}            % Report class in 11 points
+\usepackage{mathtools}
+\usepackage{amssymb,amsmath}
+\parindent0pt  \parskip10pt             % make block paragraphs
+\raggedright                            % do not right-justify
+\title{\bf CSCI576 Assignment 1 Report}  % Supply information
+
+\author{Hengyue Liu\\USC ID: 4107-2966-75}              %   for the title page.
+\date{\today}                           %   Use current date.
+
+\begin{document}                        % End of preamble, start of text.
+\maketitle                              % Print title page.
+\pagenumbering{roman}                   % roman page number for toc
+\setcounter{page}{2}                    % make it start with "ii"
+\tableofcontents                        % Print table of contents
+\renewcommand{\chaptername}{Part}
+%\renewcommand{\thechapter}{\Alph{chapter}}
+\chapter{Written Questions}                % Print a "chapter" heading
+\pagenumbering{arabic}                  % Start text with arabic 1
+Most of this example applies to \texttt{article} and \texttt{book} classes
+as well as to \texttt{report} class. In \texttt{article} class, however,
+the default position for the title information is at the top of
+the first text page rather than on a separate page. Also, it is
+not usual to request a table of contents with \texttt{article} class.
+ 
+\section*{Q 1}                  % Print a "section" heading
+Solutions:
+\begin{itemize}
+\item                           % The following text will be \begin{quote}
+ $N_{l}=450$\\                                %    set off and indented.
+ $N_{p}=520$\\
+ $N_{FPS}=25$\\ 
+ P=12 bits per pixel for 4:2:0 scheme\\
+ $N_l \cdot N_p \cdot N_{FPS} \cdot P = 7.02\times10^7$ bits/s.\\
+ So, the bit-rate produced by the camera is $7.02\times10^7$ bits/s.\\
+\item
+
+                             % End of indented text
+ \end{itemize}   
+But note that---unlike the \texttt{book} and \texttt{report} classes---the
+\texttt{article} class does not have a ``chapter" command.
+ 
+\end{document}                          % The required last line
