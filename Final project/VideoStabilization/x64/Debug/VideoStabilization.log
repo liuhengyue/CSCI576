@@ -1,0 +1,9 @@
+﻿  main.cpp
+c:\users\henry\documents\visual studio 2015\projects\videostabilization\videostabilization\image.h(55): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: 参见“strcpy”的声明
+c:\users\henry\documents\visual studio 2015\projects\videostabilization\videostabilization\main.cpp(367): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+c:\users\henry\documents\visual studio 2015\projects\videostabilization\videostabilization\main.cpp(99): warning C4474: sscanf: 格式字符串中传递的参数太多
+  c:\users\henry\documents\visual studio 2015\projects\videostabilization\videostabilization\main.cpp(99): note: 占位符和其参数预计 1 可变参数，但提供的却是 4 参数
+c:\users\henry\documents\visual studio 2015\projects\videostabilization\videostabilization\main.cpp(99): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(2254): note: 参见“sscanf”的声明
+  VideoStabilization.vcxproj -> C:\Users\henry\documents\visual studio 2015\Projects\VideoStabilization\x64\Debug\VideoStabilization.exe

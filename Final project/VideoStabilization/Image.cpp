@@ -40,7 +40,18 @@ MyImage::MyImage( MyImage *otherImage)
 
 
 }
+void MyImage::setImageData(cv::Mat imgMat) {
 
+	//Data = new char[Width*Height * 3];
+
+	for (int i = 0; i < Height; i++) {
+		for (int j = 0; j < Width; j++) {
+				Data[3*(i*Width + j )] = char(imgMat.at<cv::Vec3b>(i, j) [0]);
+				Data[3*(i*Width + j)+1] = char(imgMat.at<cv::Vec3b>(i, j) [1]);
+				Data[3*(i*Width + j)+2] = char(imgMat.at<cv::Vec3b>(i, j) [2]);
+		}
+	}
+}
 
 
 // = operator overload
@@ -136,7 +147,7 @@ bool MyImage::WriteImage()
 	
 	// Create a valid output file pointer
 	FILE *OUT_FILE;
-	OUT_FILE = fopen(ImagePath, "wb");
+	OUT_FILE = fopen(ImagePath, "ab+");
 	if ( OUT_FILE == NULL ) 
 	{
 		fprintf(stderr, "Error Opening File for Writing");
@@ -245,7 +256,7 @@ bool MyImage::ReadFrame(int index) {
 	}
 
 	// Allocate Data structure and copy
-	Data = new char[Width*Height * 3];
+	 Data = new char[Width*Height * 3];
 	for (i = 0; i < Height*Width; i++)
 	{
 		Data[3 * i] = Bbuf[i];
@@ -262,3 +273,72 @@ bool MyImage::ReadFrame(int index) {
 	return true;
 
 }
+bool MyImage::WriteFrame(int index) {
+	// Verify ImagePath
+	// Verify ImagePath
+	if (ImagePath[0] == 0 || Width < 0 || Height < 0)
+	{
+		fprintf(stderr, "Image or Image properties not defined");
+		return false;
+	}
+
+	// Create a valid output file pointer
+	FILE *OUT_FILE;
+	OUT_FILE = fopen(ImagePath, "ab+");
+	if (OUT_FILE == NULL)
+	{
+		fprintf(stderr, "Error Opening File for Writing");
+		return false;
+	}
+
+	// Create and populate RGB buffers
+	int i;
+	char *Rbuf = new char[Height*Width];
+	char *Gbuf = new char[Height*Width];
+	char *Bbuf = new char[Height*Width];
+
+	for (i = 0; i < Height*Width; i++)
+	{
+		Bbuf[i] = Data[3 * i];
+		Gbuf[i] = Data[3 * i + 1];
+		Rbuf[i] = Data[3 * i + 2];
+	}
+
+
+	// Write data to file
+
+	//change file location
+	if (fseek(OUT_FILE, index*Width*Height, SEEK_SET)) {
+		fprintf(stderr, "cannot jump to the target frame");
+		return false;
+	}
+	for (i = 0; i < Width*Height; i++)
+	{
+		fputc(Rbuf[i], OUT_FILE);
+	}
+	if (fseek(OUT_FILE, index*Width*Height*3, SEEK_SET)) {
+		fprintf(stderr, "cannot jump to the target frame");
+		return false;
+	}
+	for (i = 0; i < Width*Height; i++)
+	{
+		fputc(Gbuf[i], OUT_FILE);
+	}
+	if (fseek(OUT_FILE, index*Width*Height * 5, SEEK_SET)) {
+		fprintf(stderr, "cannot jump to the target frame");
+		return false;
+	}
+	for (i = 0; i < Width*Height; i++)
+	{
+		fputc(Bbuf[i], OUT_FILE);
+	}
+
+	// Clean up and return
+	delete Rbuf;
+	delete Gbuf;
+	delete Bbuf;
+	fclose(OUT_FILE);
+
+	return true;
+
+};

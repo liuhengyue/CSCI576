@@ -24,7 +24,7 @@
 #include <memory.h>
 #include <tchar.h>
 #include <string.h>
-
+#include "opencv2/core.hpp"
 // Class structure of Image 
 // Use to encapsulate an RGB image
 class MyImage 
@@ -41,6 +41,7 @@ public:
 	MyImage();
 	// Copy Constructor
 	MyImage::MyImage( MyImage *otherImage);
+
 	// Destructor
 	~MyImage();
 
@@ -56,11 +57,12 @@ public:
 	int		getHeight() { return Height; };
 	char*	getImageData() { return Data; };
 	char*	getImagePath() { return ImagePath; }
-
+	void setImageData(cv::Mat imgMat);
 	// Input Output operations
 	bool	ReadImage();
 	bool	WriteImage();
 	bool ReadFrame(int index);
+	bool WriteFrame(int index);
 	// Modifications
 	bool	Modify();
 
